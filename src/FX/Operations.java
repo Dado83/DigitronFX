@@ -1,6 +1,6 @@
 package FX;
 
-import java.awt.TextField;
+import javafx.scene.control.TextField;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 

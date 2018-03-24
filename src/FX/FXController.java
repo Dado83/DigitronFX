@@ -1,12 +1,16 @@
 package FX;
 
-import java.awt.TextField;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
-public class FXController {
+public class FXController implements Initializable{
 	
 	Operations operation;
 	private boolean equalsState;
@@ -48,9 +52,10 @@ public class FXController {
 	@FXML
 	private TextField display;
 	
+	
 	@FXML
-	public void onClick(Button b) {
-		String id = b.getId();
+	public void onClick(ActionEvent event) {
+		String id = ((Button)event.getSource()).getId();
         try {
            /* if (equalsState) {
                 disp.setText("");
@@ -62,46 +67,45 @@ public class FXController {
             	display.setText("");
             }
                 switch (id) {
-                    case "0":
+                    case "button0":
                             if (display.getText().equals("")) {
                             	display.setText("");
                             } else {
                             	display.setText(display.getText() + "0");
                             }
                         break;
-                    case "1":
-
+                    case "button1":
                         display.setText(display.getText() + "1");
                         break;
-                    case "2":
+                    case "button2":
                         display.setText(display.getText() + "2");
                         break;
-                    case "3":
+                    case "button3":
                         display.setText(display.getText() + "3");
                         break;
-                    case "4":
+                    case "button4":
                         display.setText(display.getText() + "4");
                         break;
-                    case "5":
+                    case "button5":
                         display.setText(display.getText() + "5");
                         break;
-                    case "6":
+                    case "button6":
                         display.setText(display.getText() + "6");
                         break;
-                    case "7":
+                    case "button7":
                         display.setText(display.getText() + "7");
                         break;
-                    case "8":
+                    case "button8":
                         display.setText(display.getText() + "8");
                         break;
-                    case "9":
+                    case "button9":
                         display.setText(display.getText() + "9");
                         break;
-                    case ".":
+                    case "decimal":
                         display.setText(display.getText() + ".");
                         decimal.setDisable(true);;
                         break;
-                    case "+":
+                    case "add":
                         if (operation.getOperand() == 'x') {
                             operation.add(Double.parseDouble("" + display.getText()), display);
                             decimal.setDisable(false);
@@ -111,7 +115,7 @@ public class FXController {
                             decimal.setDisable(false);
                         }
                         break;
-                    case "-":
+                    case "subtract":
                         if (operation.getOperand() == 'x') {
                             operation.subtract(Double.parseDouble("" + display.getText()), display);
                             decimal.setDisable(false);
@@ -121,7 +125,7 @@ public class FXController {
                             decimal.setDisable(false);
                         }
                         break;
-                    case "x":
+                    case "multiply":
                         if (operation.getOperand() == 'x') {
                             operation.multiply(Double.parseDouble("" + display.getText()), display);
                             decimal.setDisable(false);
@@ -131,7 +135,7 @@ public class FXController {
                             decimal.setDisable(false);
                         }
                         break;
-                    case "/":
+                    case "divide":
                         if (operation.getOperand() == 'x') {
                             operation.divide(Double.parseDouble("" + display.getText()), display);
                             decimal.setDisable(false);
@@ -153,7 +157,7 @@ public class FXController {
                         operation.setDouble();
                         decimal.setDisable(false);
                         break;
-                    case "=":
+                    case "result":
                         BigDecimal bd = new BigDecimal(operation.opResult(Double.parseDouble("" + display.getText()), display));
                         bd = bd.setScale(2, RoundingMode.HALF_EVEN);
                         display.setText("" + bd);
@@ -161,7 +165,7 @@ public class FXController {
                         equalsState = true;
                         //AC.performClick();
                         break;
-                    case "neg":
+                    case "negative":
                         display.setText("" + Double.parseDouble("" + display.getText()) * -1);
                         break;
                     case "root":
@@ -179,9 +183,16 @@ public class FXController {
 
         }
 
-	
 	@FXML
-	public void initialize() {
+	public void Proba(ActionEvent event) {
+		String string = ((Button)event.getSource()).getId();
+		display.setText(string);
+	}
+	
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		operation = new Operations();
+		
 	}
 }
