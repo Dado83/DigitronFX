@@ -68,11 +68,7 @@ public class FXController implements Initializable{
             }
                 switch (id) {
                     case "button0":
-                            if (display.getText().equals("")) {
-                            	display.setText("");
-                            } else {
-                            	display.setText(display.getText() + "0");
-                            }
+                        display.setText(display.getText() + "0");
                         break;
                     case "button1":
                         display.setText(display.getText() + "1");
