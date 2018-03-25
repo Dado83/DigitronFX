@@ -5,10 +5,13 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class FXController implements Initializable{
 	
@@ -180,9 +183,129 @@ public class FXController implements Initializable{
         }
 
 	@FXML
-	public void Proba(ActionEvent event) {
-		String string = ((Button)event.getSource()).getId();
-		display.setText(string);
+	public void onKeyPress(KeyEvent event) {
+		KeyCode keyCode = event.getCode();
+		try {
+	           /* if (equalsState) {
+	                disp.setText("");
+	                equalsState = false;
+	            } else {
+
+	            }*/
+	            if (display.getText().equals("NO DATA")) {
+	            	display.setText("");
+	            }
+	                switch (keyCode) {
+	                    case NUMPAD0:
+	                        display.setText(display.getText() + "0");
+	                        break;
+	                    case NUMPAD1:
+	                        display.setText(display.getText() + "1");
+	                        break;
+	                    case NUMPAD2:
+	                        display.setText(display.getText() + "2");
+	                        break;
+	                    case NUMPAD3:
+	                        display.setText(display.getText() + "3");
+	                        break;
+	                    case NUMPAD4:
+	                        display.setText(display.getText() + "4");
+	                        break;
+	                    case NUMPAD5:
+	                        display.setText(display.getText() + "5");
+	                        break;
+	                    case NUMPAD6:
+	                        display.setText(display.getText() + "6");
+	                        break;
+	                    case NUMPAD7:
+	                        display.setText(display.getText() + "7");
+	                        break;
+	                    case NUMPAD8:
+	                        display.setText(display.getText() + "8");
+	                        break;
+	                    case NUMPAD9:
+	                        display.setText(display.getText() + "9");
+	                        break;
+	                    case DECIMAL:
+	                        display.setText(display.getText() + ".");
+	                        decimal.setDisable(true);;
+	                        break;
+	                    case PLUS:
+	                        if (operation.getOperand() == 'x') {
+	                            operation.add(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        } else {
+	                            result.fire();;
+	                            operation.add(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        }
+	                        break;
+	                    case MINUS:
+	                        if (operation.getOperand() == 'x') {
+	                            operation.subtract(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        } else {
+	                            result.fire();
+	                            operation.subtract(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        }
+	                        break;
+	                    case MULTIPLY:
+	                        if (operation.getOperand() == 'x') {
+	                            operation.multiply(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        } else {
+	                            result.fire();
+	                            operation.multiply(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        }
+	                        break;
+	                    case DIVIDE:
+	                        if (operation.getOperand() == 'x') {
+	                            operation.divide(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        } else {
+	                            result.fire();
+	                            operation.divide(Double.parseDouble("" + display.getText()), display);
+	                            decimal.setDisable(false);
+	                        }
+	                        break;
+	                    case BACK_SPACE:
+	                        if (display.getText().equals("")) {
+
+	                        } else {
+	                            display.setText((String) display.getText().subSequence(0, display.getText().length() - 1));
+	                        }
+	                        break;
+	                    case ESCAPE:
+	                        display.setText("");
+	                        operation.setDouble();
+	                        decimal.setDisable(false);
+	                        break;
+	                    case ENTER:
+	                        BigDecimal bd = new BigDecimal(operation.opResult(Double.parseDouble("" + display.getText()), display));
+	                        bd = bd.setScale(2, RoundingMode.HALF_EVEN);
+	                        display.setText("" + bd);
+	                        decimal.setDisable(true);
+	                        equalsState = true;
+	                        //AC.performClick();
+	                        break;
+	                    case N:
+	                        display.setText("" + Double.parseDouble("" + display.getText()) * -1);
+	                        break;
+	                    case R:
+	                        //BigDecimal bdR = new BigDecimal(m.squareRoot(Double.parseDouble("" + disp.getText()), pastOp, disp));
+	                        //bdR = bdR.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+	                        display.setText("" + operation.squareRoot(Double.parseDouble("" + display.getText()), display));
+	                        decimal.setDisable(false);
+	                        break;
+	                    default:
+	                        break;
+	                }
+	            }catch(NumberFormatException e){
+	                display.setText("NO DATA");
+	            }
+
 	}
 	
 	
