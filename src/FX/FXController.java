@@ -5,19 +5,21 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class FXController implements Initializable{
 	
 	Operations operation;
 	private boolean equalsState;
 	
+	@FXML
+	private AnchorPane anchorPane;
 	@FXML
 	private Button button1;
 	@FXML
@@ -60,12 +62,12 @@ public class FXController implements Initializable{
 	public void onClick(ActionEvent event) {
 		String id = ((Button)event.getSource()).getId();
         try {
-           /* if (equalsState) {
-                disp.setText("");
+            if (equalsState) {
+                display.setText("");
                 equalsState = false;
             } else {
 
-            }*/
+            }
             if (display.getText().equals("NO DATA")) {
             	display.setText("");
             }
@@ -186,12 +188,12 @@ public class FXController implements Initializable{
 	public void onKeyPress(KeyEvent event) {
 		KeyCode keyCode = event.getCode();
 		try {
-	           /* if (equalsState) {
-	                disp.setText("");
+	          if (equalsState) {
+	                display.setText("");
 	                equalsState = false;
 	            } else {
 
-	            }*/
+	            }
 	            if (display.getText().equals("NO DATA")) {
 	            	display.setText("");
 	            }
@@ -230,17 +232,17 @@ public class FXController implements Initializable{
 	                        display.setText(display.getText() + ".");
 	                        decimal.setDisable(true);;
 	                        break;
-	                    case PLUS:
+	                    case ADD:
 	                        if (operation.getOperand() == 'x') {
 	                            operation.add(Double.parseDouble("" + display.getText()), display);
 	                            decimal.setDisable(false);
 	                        } else {
-	                            result.fire();;
+	                            result.fire();
 	                            operation.add(Double.parseDouble("" + display.getText()), display);
 	                            decimal.setDisable(false);
 	                        }
 	                        break;
-	                    case MINUS:
+	                    case SUBTRACT:
 	                        if (operation.getOperand() == 'x') {
 	                            operation.subtract(Double.parseDouble("" + display.getText()), display);
 	                            decimal.setDisable(false);
@@ -305,7 +307,6 @@ public class FXController implements Initializable{
 	            }catch(NumberFormatException e){
 	                display.setText("NO DATA");
 	            }
-
 	}
 	
 	
