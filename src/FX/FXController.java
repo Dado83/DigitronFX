@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -56,7 +57,8 @@ public class FXController implements Initializable{
 	private Button negative;
 	@FXML
 	private TextField display;
-	
+	@FXML
+	private Label postDisplay;
 	
 	@FXML
 	public void onClick(ActionEvent event) {
@@ -108,41 +110,41 @@ public class FXController implements Initializable{
                         break;
                     case "add":
                         if (operation.getOperand() == 'x') {
-                            operation.add(Double.parseDouble("" + display.getText()), display);
+                            operation.add(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         } else {
                             result.fire();;
-                            operation.add(Double.parseDouble("" + display.getText()), display);
+                            operation.add(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         }
                         break;
                     case "subtract":
                         if (operation.getOperand() == 'x') {
-                            operation.subtract(Double.parseDouble("" + display.getText()), display);
+                            operation.subtract(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         } else {
                             result.fire();
-                            operation.subtract(Double.parseDouble("" + display.getText()), display);
+                            operation.subtract(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         }
                         break;
                     case "multiply":
                         if (operation.getOperand() == 'x') {
-                            operation.multiply(Double.parseDouble("" + display.getText()), display);
+                            operation.multiply(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         } else {
                             result.fire();
-                            operation.multiply(Double.parseDouble("" + display.getText()), display);
+                            operation.multiply(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         }
                         break;
                     case "divide":
                         if (operation.getOperand() == 'x') {
-                            operation.divide(Double.parseDouble("" + display.getText()), display);
+                            operation.divide(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         } else {
                             result.fire();
-                            operation.divide(Double.parseDouble("" + display.getText()), display);
+                            operation.divide(Double.parseDouble("" + display.getText()), display, postDisplay);
                             decimal.setDisable(false);
                         }
                         break;
@@ -157,23 +159,23 @@ public class FXController implements Initializable{
                         display.setText("");
                         operation.setDouble();
                         decimal.setDisable(false);
+                        clearPostDisplay();
                         break;
                     case "result":
-                        BigDecimal bd = new BigDecimal(operation.opResult(Double.parseDouble("" + display.getText()), display));
+                    	BigDecimal bd = new BigDecimal(operation.opResult(Double.parseDouble("" + display.getText()), display, postDisplay));
                         bd = bd.setScale(2, RoundingMode.HALF_EVEN);
                         display.setText("" + bd);
                         decimal.setDisable(true);
                         equalsState = true;
-                        //AC.performClick();
+                        clearPostDisplay();
                         break;
                     case "negative":
                         display.setText("" + Double.parseDouble("" + display.getText()) * -1);
                         break;
-                    case "root":
-                        //BigDecimal bdR = new BigDecimal(m.squareRoot(Double.parseDouble("" + disp.getText()), pastOp, disp));
-                        //bdR = bdR.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+                    case "root":                    
                         display.setText("" + operation.squareRoot(Double.parseDouble("" + display.getText()), display));
                         decimal.setDisable(false);
+                        clearPostDisplay();
                         break;
                     default:
                         break;
@@ -234,41 +236,41 @@ public class FXController implements Initializable{
 	                        break;
 	                    case ADD:
 	                        if (operation.getOperand() == 'x') {
-	                            operation.add(Double.parseDouble("" + display.getText()), display);
+	                            operation.add(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        } else {
 	                            result.fire();
-	                            operation.add(Double.parseDouble("" + display.getText()), display);
+	                            operation.add(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        }
 	                        break;
 	                    case SUBTRACT:
 	                        if (operation.getOperand() == 'x') {
-	                            operation.subtract(Double.parseDouble("" + display.getText()), display);
+	                            operation.subtract(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        } else {
 	                            result.fire();
-	                            operation.subtract(Double.parseDouble("" + display.getText()), display);
+	                            operation.subtract(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        }
 	                        break;
 	                    case MULTIPLY:
 	                        if (operation.getOperand() == 'x') {
-	                            operation.multiply(Double.parseDouble("" + display.getText()), display);
+	                            operation.multiply(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        } else {
 	                            result.fire();
-	                            operation.multiply(Double.parseDouble("" + display.getText()), display);
+	                            operation.multiply(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        }
 	                        break;
 	                    case DIVIDE:
 	                        if (operation.getOperand() == 'x') {
-	                            operation.divide(Double.parseDouble("" + display.getText()), display);
+	                            operation.divide(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        } else {
 	                            result.fire();
-	                            operation.divide(Double.parseDouble("" + display.getText()), display);
+	                            operation.divide(Double.parseDouble("" + display.getText()), display, postDisplay);
 	                            decimal.setDisable(false);
 	                        }
 	                        break;
@@ -283,23 +285,23 @@ public class FXController implements Initializable{
 	                        display.setText("");
 	                        operation.setDouble();
 	                        decimal.setDisable(false);
+	                        clearPostDisplay();
 	                        break;
 	                    case ENTER:
-	                        BigDecimal bd = new BigDecimal(operation.opResult(Double.parseDouble("" + display.getText()), display));
+	                    	BigDecimal bd = new BigDecimal(operation.opResult(Double.parseDouble("" + display.getText()), display, postDisplay));
 	                        bd = bd.setScale(2, RoundingMode.HALF_EVEN);
 	                        display.setText("" + bd);
 	                        decimal.setDisable(true);
 	                        equalsState = true;
-	                        //AC.performClick();
+	                        clearPostDisplay();
 	                        break;
 	                    case N:
 	                        display.setText("" + Double.parseDouble("" + display.getText()) * -1);
 	                        break;
-	                    case R:
-	                        //BigDecimal bdR = new BigDecimal(m.squareRoot(Double.parseDouble("" + disp.getText()), pastOp, disp));
-	                        //bdR = bdR.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+	                    case R:         
 	                        display.setText("" + operation.squareRoot(Double.parseDouble("" + display.getText()), display));
 	                        decimal.setDisable(false);
+	                        clearPostDisplay();
 	                        break;
 	                    default:
 	                        break;
@@ -309,6 +311,9 @@ public class FXController implements Initializable{
 	            }
 	}
 	
+	private void clearPostDisplay() {
+		postDisplay.setText("");
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

@@ -9,3 +9,7 @@
 .button:pressed{
 	-fx-background-color: grey;
 }
+
+.text-field{
+	-fx-background-color: lightgrey;
+}

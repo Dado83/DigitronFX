@@ -1,5 +1,6 @@
 package FX;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -20,39 +21,43 @@ public class Operations {
         return operand;
     }
 
-    public void add(double i, TextField t) {
+    public void add(double i, TextField t, Label l) {
         numA = i;
         BigDecimal bd = new BigDecimal(numA);
         bd = bd.setScale(2, RoundingMode.HALF_EVEN);
         numA = bd.doubleValue();
         operand = '+';
+        l.setText("" + numA);
         t.setText("");
     }
 
-    public void subtract(double i, TextField t) {
+    public void subtract(double i, TextField t, Label l) {
         numA = i;
         BigDecimal bd = new BigDecimal(numA);
         bd = bd.setScale(2, RoundingMode.HALF_EVEN);
         numA = bd.doubleValue();
         operand = '-';
+        l.setText("" + numA);
         t.setText("");
     }
 
-    public void multiply(double i, TextField t) {
+    public void multiply(double i, TextField t, Label l) {
         numA = i;
         BigDecimal bd = new BigDecimal(numA);
         bd = bd.setScale(2, RoundingMode.HALF_EVEN);
         numA = bd.doubleValue();
         operand = '*';
+        l.setText("" + numA);
         t.setText("");
     }
 
-    public void divide(double i, TextField t) {
+    public void divide(double i, TextField t, Label l) {
         numA = i;
         BigDecimal bd = new BigDecimal(numA);
         bd = bd.setScale(2, RoundingMode.HALF_EVEN);
         numA = bd.doubleValue();
         operand = '/';
+        l.setText("" + numA);
         t.setText("");
     }
 
@@ -64,20 +69,24 @@ public class Operations {
         return numA;
     }
 
-    public double opResult(double i, TextField t) {
+    public double opResult(double i, TextField t, Label l) {
 
         switch (operand) {
             case '+':
                 numA += i;
+                l.setText("" + numA);
                 break;
             case '-':
                 numA -= i;
+                l.setText("" + numA);
                 break;
             case '*':
                 numA *= i;
+                l.setText("" + numA);
                 break;
             case '/':
                 numA /= i;
+                l.setText("" + numA);
                 break;
             default:
                 break;
